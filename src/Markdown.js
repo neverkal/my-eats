@@ -40,8 +40,6 @@ const options = {
 export default function ReactMarkdown(props) {
   const [markdown, setMarkdown] = useState('');
 
-  console.log(props.children);
-
   useEffect(() => {
     fetch(props.children)
       .then((response) => response.text())
