@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -96,21 +97,30 @@ export default function Blog() {
       <Container maxWidth="lg">
         <Header title="Blog" sections={sections} />
         <main>
-          <MainFeaturedPost post={mainFeaturedPost} />
-          <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
-            ))}
-          </Grid>
-          <Grid container spacing={5} className={classes.mainGrid}>
-            <Main title="From the firehose" posts={posts} />
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
-          </Grid>
+          <Route
+            path="/"
+            render={() => (
+              <React.Fragment>
+                <MainFeaturedPost post={mainFeaturedPost} />
+                <Grid container spacing={4}>
+                  {featuredPosts.map((post) => (
+                    <FeaturedPost key={post.title} post={post} />
+                  ))}
+                </Grid>
+                <Grid container spacing={5} className={classes.mainGrid}>
+                  <Main title="From the firehose" posts={posts} />
+                  <Sidebar
+                    title={sidebar.title}
+                    description={sidebar.description}
+                    archives={sidebar.archives}
+                    social={sidebar.social}
+                  />
+                </Grid>
+              </React.Fragment>
+            )}
+            exact
+          />
+          <Route path="/test" render={() => 'test'} />
         </main>
       </Container>
       <Footer title="Footer" description="Something here to give the footer a purpose!" />
