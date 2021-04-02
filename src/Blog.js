@@ -10,6 +10,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import Header from './Header';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
+import Write from './Write/Write';
 import Main from './Main';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
@@ -120,7 +121,7 @@ export default function Blog() {
             )}
             exact
           />
-          <Route path="/test" render={() => 'test'} />
+          <Route path="/write" component={Write} />
         </main>
       </Container>
       <Footer title="Footer" description="Something here to give the footer a purpose!" />
