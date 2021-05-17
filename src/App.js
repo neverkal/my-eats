@@ -7,9 +7,31 @@ import SignUp from './SignUp/SignUp';
 export default function App() {
   return (
     <Switch>
-      <Route component={Blog} path="/" />
-      <Route component={SignIn} path="/sign-in" />
-      <Route component={SignUp} path="/sign-up" />
+      <Route
+        path="/"
+        render={() => {
+          return <Blog />;
+        }}
+        exact
+      />
+      <Route
+        path="/blog"
+        render={() => {
+          return <Blog />;
+        }}
+      />
+      <Route
+        path="/sign-in"
+        render={() => {
+          return <SignIn />;
+        }}
+      />
+      <Route
+        path="/sign-up"
+        render={() => {
+          return <SignUp />;
+        }}
+      />
     </Switch>
   );
 }

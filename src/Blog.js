@@ -99,7 +99,7 @@ export default function Blog() {
         <Header title="Blog" sections={sections} />
         <main>
           <Route
-            path="/"
+            path={['/', '/blog']}
             render={() => (
               <React.Fragment>
                 <MainFeaturedPost post={mainFeaturedPost} />
@@ -121,7 +121,7 @@ export default function Blog() {
             )}
             exact
           />
-          <Route path="/write" component={Write} />
+          <Route path="/blog/write" component={Write} exact />
         </main>
       </Container>
       <Footer title="Footer" description="Something here to give the footer a purpose!" />
