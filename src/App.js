@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Blog from './Blog';
-import SignIn from './SignIn/SignIn';
-import SignUp from './SignUp/SignUp';
+import Blog from './components/Blog/Blog';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 
 export default function App() {
   return (
@@ -32,6 +32,7 @@ export default function App() {
           return <SignUp />;
         }}
       />
+      <Route render={() => <div>페이지가 존재하지 않습니다.</div>} />
     </Switch>
   );
 }

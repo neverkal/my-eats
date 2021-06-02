@@ -24,4 +24,4 @@ yarn-error.log*
 
 config/
 scripts/
-yarn.lock
+my-eats.code-workspace

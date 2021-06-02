@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -7,16 +7,17 @@ import Container from '@material-ui/core/Container';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import Header from './Header';
-import MainFeaturedPost from './MainFeaturedPost';
-import FeaturedPost from './FeaturedPost';
-import Write from './Write/Write';
-import Main from './Main';
-import Sidebar from './Sidebar';
-import Footer from './Footer';
-import post1 from './md/blog-post.1.md';
-import post2 from './md/blog-post.2.md';
-import post3 from './md/blog-post.3.md';
+import Header from '../Header';
+import MainFeaturedPost from '../MainFeaturedPost';
+import FeaturedPost from '../FeaturedPost';
+import Main from '../Main';
+import Sidebar from '../Sidebar';
+import Footer from '../Footer';
+import post1 from '../../md/blog-post.1.md';
+import post2 from '../../md/blog-post.2.md';
+import post3 from '../../md/blog-post.3.md';
+import Write from '../Write/Write';
+import Seoul from '../Seoul/Seoul';
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -25,16 +26,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
+  { title: '서울', url: '/blog/seoul' },
+  { title: '경기', url: '#' },
+  { title: '부산', url: '#' },
+  { title: '제주', url: '#' },
 ];
 
 const mainFeaturedPost = {
@@ -98,30 +93,34 @@ export default function Blog() {
       <Container maxWidth="lg">
         <Header title="Blog" sections={sections} />
         <main>
-          <Route
-            path={['/', '/blog']}
-            render={() => (
-              <React.Fragment>
-                <MainFeaturedPost post={mainFeaturedPost} />
-                <Grid container spacing={4}>
-                  {featuredPosts.map((post) => (
-                    <FeaturedPost key={post.title} post={post} />
-                  ))}
-                </Grid>
-                <Grid container spacing={5} className={classes.mainGrid}>
-                  <Main title="From the firehose" posts={posts} />
-                  <Sidebar
-                    title={sidebar.title}
-                    description={sidebar.description}
-                    archives={sidebar.archives}
-                    social={sidebar.social}
-                  />
-                </Grid>
-              </React.Fragment>
-            )}
-            exact
-          />
-          <Route path="/blog/write" component={Write} exact />
+          <Switch>
+            <Route
+              path={['/', '/blog']}
+              render={() => (
+                <React.Fragment>
+                  <MainFeaturedPost post={mainFeaturedPost} />
+                  <Grid container spacing={4}>
+                    {featuredPosts.map((post) => (
+                      <FeaturedPost key={post.title} post={post} />
+                    ))}
+                  </Grid>
+                  <Grid container spacing={5} className={classes.mainGrid}>
+                    <Main title="From the firehose" posts={posts} />
+                    <Sidebar
+                      title={sidebar.title}
+                      description={sidebar.description}
+                      archives={sidebar.archives}
+                      social={sidebar.social}
+                    />
+                  </Grid>
+                </React.Fragment>
+              )}
+              exact
+            />
+            <Route path="/blog/write" component={Write} />
+            <Route path="/blog/seoul" component={Seoul} />
+            <Route render={() => <div>페이지가 존재하지 않습니다.</div>} />
+          </Switch>
         </main>
       </Container>
       <Footer title="Footer" description="Something here to give the footer a purpose!" />

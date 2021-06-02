@@ -39,9 +39,9 @@ export default function Header(props) {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Link href="/sign-up">
+        <Link href="/sign-in">
           <Button variant="outlined" size="small">
-            Sign up
+            Sign in
           </Button>
         </Link>
       </Toolbar>
