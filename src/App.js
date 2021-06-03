@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Blog from './components/Blog/Blog';
 import SignIn from './components/SignIn/SignIn';
+import SignInContainer from './containers/SignInContainer';
 import SignUp from './components/SignUp/SignUp';
 
 export default function App() {
@@ -23,7 +24,7 @@ export default function App() {
       <Route
         path="/sign-in"
         render={() => {
-          return <SignIn />;
+          return <SignInContainer />;
         }}
       />
       <Route

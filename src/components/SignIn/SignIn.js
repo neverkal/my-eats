@@ -46,8 +46,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn({ email, password, onChangeInput }) {
   const classes = useStyles();
+
+  const onChange = (e) => onChangeInput(e.target.name, e.target.value);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -70,6 +72,8 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={onChange}
           />
           <TextField
             variant="outlined"
@@ -81,6 +85,8 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={onChange}
           />
           <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>

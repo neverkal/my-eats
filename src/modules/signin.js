@@ -1,19 +1,24 @@
 import { createAction, handleActions } from 'redux-actions';
 
 const SIGNIN_USER = 'signin/INSERT_USER';
+const CHANGE_INPUT = 'signin/CHANGE_INPUT';
 
-export const signInUser = createAction(SIGNIN_USER);
+export const changeInput = createAction(CHANGE_INPUT, (key, value) => ({ key, value }));
 
 const initialSignInUser = {
-  userID: '',
-  userPassWord: '',
+  email: '',
+  password: '',
+  remember: false,
 };
 
-const signIn = handleActions(
+const signin = handleActions(
   {
-    [SIGNIN_USER]: (state, action) => ({
+    [CHANGE_INPUT]: (state, { payload: { key, value } }) => ({
       ...state,
-      action.payload
+      [key]: value,
     }),
-  }
-, initialSignInUser);
+  },
+  initialSignInUser,
+);
+
+export default signin;
