@@ -1,17 +1,30 @@
 import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { changeInput } from '../modules/signin';
+import { useDispatch, connect } from 'react-redux';
+import { changeInput, signInUser } from '../modules/signin';
 import SignIn from '../components/SignIn/SignIn';
 
-const SignInContainer = () => {
-  const { email, password } = useSelector(({ signin }) => ({
-    email: signin.email,
-    password: signin.password,
-  }));
+const SignInContainer = ({ email, password, loadingUser, signInUser }) => {
   const dispatch = useDispatch();
   const onChangeInput = useCallback((key, value) => dispatch(changeInput(key, value)), [dispatch]);
 
-  return <SignIn email={email} password={password} onChangeInput={onChangeInput} />;
+  return (
+    <SignIn
+      email={email}
+      password={password}
+      onChangeInput={onChangeInput}
+      onSignIn={signInUser}
+      loadingUser={loadingUser}
+    />
+  );
 };
 
-export default React.memo(SignInContainer);
+export default connect(
+  ({ signin, loading }) => ({
+    email: signin.email,
+    password: signin.password,
+    loadingUser: loading['signin/GET_USER'],
+  }),
+  {
+    signInUser,
+  },
+)(SignInContainer);
