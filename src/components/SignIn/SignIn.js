@@ -46,16 +46,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ email, password, onChangeInput, onSignIn, loadingUser }) {
+export default function SignIn({ email, password, remember, onChangeInput, onSignIn, loadingUser }) {
   const classes = useStyles();
 
   const onChange = (e) => onChangeInput(e.target.name, e.target.value);
   const onToggle = (e) => {
     onChangeInput(e.target.value, e.target.checked);
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    onSignIn(1);
+
+    try {
+      await onSignIn(1);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -98,7 +103,9 @@ export default function SignIn({ email, password, onChangeInput, onSignIn, loadi
               onChange={onChange}
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" onChange={onToggle} />}
+              control={
+                <Checkbox value="remember" color="primary" onChange={onToggle} checked={remember ? true : false} />
+              }
               label="Remember me"
             />
             <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
